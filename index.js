@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.listen(port, function () {
-    console.log('Trading View Adapter started');
+    console.log(`Trading View Adapter started on port -> ${port} , ip -> ${ipAddress}`);
 });
 
 
