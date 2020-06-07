@@ -1,17 +1,18 @@
-var express = require('express'),
-    app     = express(),
-    port    = 80;
+const port = process.env.PORT;
+const ipAddress = process.env.IP_ADDRESS;
 
+var express = require('express'),
+    app     = express();
 
 app.set('port', port);
-app.set('ipaddr',"111.11.11.111");
+app.set('ipaddr',ipAddress);
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.listen(port, function () {
-    console.log('App started');
+    console.log('Trading View Adapter started');
 });
 
 
