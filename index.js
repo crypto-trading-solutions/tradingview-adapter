@@ -18,8 +18,7 @@ app.use(bodyParser.json());
 */
 const server = http.createServer(app);
 
-server.listen(port, () => {
-  console.log(server.address());
+server.listen({port: port, host: ipAddress, ipv6Only: true}, () => {
   console.log(`Trading View Adapter started on port -> ${server.address().port} , ip -> ${server.address().address}`);
 });
 server.on('error', handleHttpServerErrors);
