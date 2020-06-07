@@ -1,5 +1,7 @@
-const port = process.env.PORT;
+const port = process.env.PORT || 4040;
 const ipAddress = process.env.IP_ADDRESS;
+const http = require('http');
+const handleHttpServerErrors = require('./utils/handleHttpServerErrors');
 
 var express = require('express'),
     app     = express();
@@ -11,10 +13,16 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-app.listen(port, function () {
-    console.log(`Trading View Adapter started on port -> ${port} , ip -> ${ipAddress}`);
-});
+/*
+* Create HTTP server.
+*/
+const server = http.createServer(app);
 
+server.listen(port, () => {
+  console.log(server.address());
+  console.log(`Trading View Adapter started on port -> ${server.address().port} , ip -> ${server.address().address}`);
+});
+server.on('error', handleHttpServerErrors);
 
 app.get('/', function (req, res) {
   res.send('hello');
