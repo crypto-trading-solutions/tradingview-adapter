@@ -1,0 +1,19 @@
+{
+  "name": "tradingview-adapter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crypto-trading-solutions/tradingview-adapter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crypto-trading-solutions/tradingview-adapter/issues"
+  },
+  "homepage": "https://github.com/crypto-trading-solutions/tradingview-adapter#readme"
+}
