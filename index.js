@@ -2,6 +2,7 @@ const port = process.env.PORT || 4040;
 const ipAddress = process.env.IP_ADDRESS;
 const http = require('http');
 const handleHttpServerErrors = require('./utils/handleHttpServerErrors');
+const router = require('./routes/api');
 
 var express = require('express'),
     app     = express();
@@ -23,15 +24,5 @@ server.listen(port, () => {
 });
 server.on('error', handleHttpServerErrors);
 
-app.get('/', function (req, res) {
-  res.send('hello');
-});
-
-app.post('/alert', function (req, res) {
-  let body = req.body; // JSON.parse(JSON.stringif());
-  console.log(body);
-  
-  res.send({ status: 'SUCCESS' });
-});
-
+app.use('/', router);
 
