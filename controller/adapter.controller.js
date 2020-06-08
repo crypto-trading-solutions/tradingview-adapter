@@ -24,7 +24,7 @@ class AdapterController {
 
         if (sendRequestError) return res.status(400).json(sendRequestError);
 
-        res.status(200).json(sendRequest);
+        res.status(200).json(sendRequest.data);
     }
 }
 
