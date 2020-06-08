@@ -19,7 +19,7 @@ class AdapterController {
         }
 
         const [sendRequestError, sendRequest] = await to(
-            axios.post(`${currentStrategy.Server_ip}:${currentStrategy.Port}/alert_data`, currentStrategy)
+            axios.post(`${currentStrategy.Server_ip}:${currentStrategy.Port}/alert_data`, tradingViewData)
         )
 
         if (sendRequestError) return res.status(400).json(sendRequestError);
