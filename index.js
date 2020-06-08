@@ -28,9 +28,9 @@ app.get('/', function (req, res) {
 });
 
 app.post('/alert', function (req, res) {
-  let body =req.body; // JSON.parse(JSON.stringif());
+  let body = req.body; // JSON.parse(JSON.stringif());
   console.log(body);
-  console.log(body.info);
+  
   res.send({ status: 'SUCCESS' });
 });
 
