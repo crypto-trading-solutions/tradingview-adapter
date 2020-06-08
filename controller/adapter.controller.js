@@ -18,11 +18,15 @@ class AdapterController {
             }
         }
 
-        const [sendRequestError, sendRequest] = await to (
-            axios.post('/alert_data', currentStrategy)
+        const [sendRequestError, sendRequest] = await to(
+            axios.post({
+                url: '/alert_data',
+                method: 'post',
+                baseURL: `${currentStrategy.Server_ip}:${currentStrategy.Port}/`,
+            }, currentStrategy)
         )
 
-        if(sendRequestError) return res.status(400).json(sendRequestError);
+        if (sendRequestError) return res.status(400).json(sendRequestError);
 
         res.status(200).json(sendRequest);
     }

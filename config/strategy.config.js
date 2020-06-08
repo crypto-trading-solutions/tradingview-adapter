@@ -1,7 +1,7 @@
 const strategies = [
     {
         "Strategy":"rwi",
-        "Server_ip":"localhost",
+        "Server_ip":"http://localhost",
         "Port":"81"
     }
 ]
