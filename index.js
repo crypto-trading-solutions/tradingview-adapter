@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 const server = http.createServer(app);
 
 server.listen(port, () => {
-  console.log(`Trading View Adapter started on port -> ${server.address().port}, node-env -> ${process.env.NODE_ENV}`);
+  console.log(`Trading View Adapter started on port -> ${server.address().port}, at -> ${Date.now()}`);
 });
 server.on('error', handleHttpServerErrors);
 
