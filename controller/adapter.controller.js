@@ -8,25 +8,27 @@ class AdapterController {
 
         const tradingViewData = req.body;
 
-        let currentStrategy = {};
+        console.log(`req: ${req}`);
+        console.log(`req.body: ${tradingViewData}`);
 
-        for (let i = 0; i < strategies.length; i++) {
+        const currentStrategy = strategies.filter(strategy => strategy.strategy === tradingViewData.strategy);
 
-            if (strategies[i].strategy === tradingViewData.strategy) {
-                currentStrategy = strategies[i];
-                break;
-            }
+        if (result.length == 1) {
+
+            const [sendRequestError, sendRequest] = await to(
+                axios.post(`${currentStrategy.serverIp}:
+                ${tradingViewData.mode === "master" ? currentStrategy.master_port : currentStrategy.development_port}/alert_data`, tradingViewData)
+            )
+
+            console.log(sendRequestError);
+
+            if (sendRequestError) return res.status(400).json(sendRequestError);
+
+            res.status(200).json(sendRequest.data);
         }
-
-        const [sendRequestError, sendRequest] = await to(
-            axios.post(`${currentStrategy.serverIp}:${currentStrategy.port}/alert_data`, tradingViewData)
-        )
-
-        console.log(sendRequestError);
-
-        if (sendRequestError) return res.status(400).json(sendRequestError);
-
-        res.status(200).json(sendRequest.data);
+        else {
+            return res.status(400).json(sendRequestError);
+        }
     }
 }
 
