@@ -20,14 +20,14 @@ class AdapterController {
                 ${tradingViewData.mode === "master" ? currentStrategy.master_port : currentStrategy.development_port}/alert_data`, tradingViewData)
             )
 
-            console.log(sendRequestError);
+            //console.log(sendRequestError);
 
             if (sendRequestError) return res.status(400).json(sendRequestError);
 
             res.status(200).json(sendRequest.data);
         }
         else {
-            return res.status(400).json(sendRequestError);
+            return res.status(400);
         }
     }
 }
