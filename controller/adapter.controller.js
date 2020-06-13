@@ -8,6 +8,7 @@ class AdapterController {
 
         const tradingViewData = req.body;
 
+        //TODO: add white IP list for tradingview ip's for MASTER version
         console.log("req.remoteAddress:");
         console.log(req.connection.remoteAddress);
 
@@ -20,9 +21,10 @@ class AdapterController {
                 ${tradingViewData.mode === "master" ? currentStrategy.master_port : currentStrategy.development_port}/alert_data`, tradingViewData)
             )
 
-            //console.log(sendRequestError);
-
-            if (sendRequestError) return res.status(400).json(sendRequestError);
+            if (sendRequestError) {
+                console.log(sendRequestError);
+                return res.status(400).json(sendRequestError);
+            }
 
             res.status(200).json(sendRequest.data);
         }
