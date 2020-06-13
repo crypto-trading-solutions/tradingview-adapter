@@ -15,6 +15,8 @@ class AdapterController {
 
         if (currentStrategy.length == 1 && ipFlag) {
 
+            console.log(tradingViewData);
+            
             const [sendRequestError, sendRequest] = await to(
                 axios.post(`${currentStrategy.serverIp}:
                 ${tradingViewData.mode === "master" ? currentStrategy.master_port : currentStrategy.development_port}/alert_data`, tradingViewData)
