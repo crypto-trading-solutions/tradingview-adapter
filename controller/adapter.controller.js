@@ -1,5 +1,7 @@
 const to = require('await-to-js').default;
 const strategies = require('../config/strategy.config');
+const ipWhitelist = require('../config/ipWhitelist.config');
+
 const axios = require('axios').default;
 
 class AdapterController {
@@ -8,10 +10,11 @@ class AdapterController {
 
         const tradingViewData = req.body;
 
-        //TODO: add white IP list for tradingview ip's for MASTER version
-        console.log("req.remoteAddress:");
         console.log(req.connection.remoteAddress);
-
+        //TODO: add white IP list for tradingview ip's for MASTER version
+        const ipFlag = ipWhitelist.some(ip => toString(req.connection.remoteAddress).search(ip)!== -1)
+        console.log("ip flag:" + ipFlag);
+        
         const currentStrategy = strategies.filter(strategy => strategy.strategy === tradingViewData.strategy);
 
         if (currentStrategy.length == 1) {
