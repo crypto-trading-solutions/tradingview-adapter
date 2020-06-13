@@ -10,14 +10,10 @@ class AdapterController {
 
         const tradingViewData = req.body;
 
-        console.log(req.connection.remoteAddress);
-        //TODO: add white IP list for tradingview ip's for MASTER version
         const ipFlag = ipWhitelist.some(ip => req.connection.remoteAddress.includes(ip))
-        console.log("ip flag:" + ipFlag);
-
         const currentStrategy = strategies.filter(strategy => strategy.strategy === tradingViewData.strategy);
 
-        if (currentStrategy.length == 1) {
+        if (currentStrategy.length == 1 && ipFlag) {
 
             const [sendRequestError, sendRequest] = await to(
                 axios.post(`${currentStrategy.serverIp}:
