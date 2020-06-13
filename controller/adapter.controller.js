@@ -12,9 +12,9 @@ class AdapterController {
 
         console.log(req.connection.remoteAddress);
         //TODO: add white IP list for tradingview ip's for MASTER version
-        const ipFlag = ipWhitelist.some(ip => toString(req.connection.remoteAddress).search(ip)!== -1)
+        const ipFlag = ipWhitelist.some(ip => req.connection.remoteAddress.search(ip)!= -1)
         console.log("ip flag:" + ipFlag);
-        
+
         const currentStrategy = strategies.filter(strategy => strategy.strategy === tradingViewData.strategy);
 
         if (currentStrategy.length == 1) {
