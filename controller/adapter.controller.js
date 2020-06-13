@@ -8,8 +8,11 @@ class AdapterController {
 
         const tradingViewData = req.body;
 
-        console.log(`req: ${req}`);
-        console.log(`req.body: ${tradingViewData}`);
+        console.log("req:");
+        console.log(req);
+
+        console.log("tradingViewData:");
+        console.log(tradingViewData);
 
         const currentStrategy = strategies.filter(strategy => strategy.strategy === tradingViewData.strategy);
 
