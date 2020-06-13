@@ -8,8 +8,8 @@ class AdapterController {
 
         const tradingViewData = req.body;
 
-        console.log("req:");
-        console.log(req);
+        console.log("req.remoteAddress:");
+        console.log(req.connection.remoteAddress);
 
         console.log("tradingViewData:");
         console.log(tradingViewData);
