@@ -1,8 +1,8 @@
 const strategies = [
     {
-        "Strategy":"rwi",
-        "Server_ip":"http://localhost",
-        "Port": process.env.NODE_ENV == 'development' ? '3030' : '81'
+        "strategy":"rwi",
+        "serverIp":"http://localhost",
+        "port": process.env.NODE_ENV == 'development' ? '3030' : '81'
     }
 ]
 

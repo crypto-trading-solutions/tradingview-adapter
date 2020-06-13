@@ -12,15 +12,17 @@ class AdapterController {
 
         for (let i = 0; i < strategies.length; i++) {
 
-            if (strategies[i].Strategy === tradingViewData.Strategy) {
+            if (strategies[i].strategy === tradingViewData.strategy) {
                 currentStrategy = strategies[i];
                 break;
             }
         }
 
         const [sendRequestError, sendRequest] = await to(
-            axios.post(`${currentStrategy.Server_ip}:${currentStrategy.Port}/alert_data`, tradingViewData)
+            axios.post(`${currentStrategy.serverIp}:${currentStrategy.port}/alert_data`, tradingViewData)
         )
+
+        console.log(sendRequestError);
 
         if (sendRequestError) return res.status(400).json(sendRequestError);
 
