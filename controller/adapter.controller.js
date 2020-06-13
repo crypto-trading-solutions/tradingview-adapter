@@ -11,12 +11,9 @@ class AdapterController {
         console.log("req.remoteAddress:");
         console.log(req.connection.remoteAddress);
 
-        console.log("tradingViewData:");
-        console.log(tradingViewData);
-
         const currentStrategy = strategies.filter(strategy => strategy.strategy === tradingViewData.strategy);
 
-        if (result.length == 1) {
+        if (currentStrategy.length == 1) {
 
             const [sendRequestError, sendRequest] = await to(
                 axios.post(`${currentStrategy.serverIp}:
