@@ -2,10 +2,10 @@
 //              store strategy server address data which will handle adapter signals
 const strategies = [
     {
-        "Strategy":"rwi",
+        "strategy":"rwi",
         "serverIp":"http://localhost",
-        "development_port": "3030",
-        "master_port" : "81"
+        "developmentPort": "3030",
+        "masterPort" : "81"
     }
 ]
 

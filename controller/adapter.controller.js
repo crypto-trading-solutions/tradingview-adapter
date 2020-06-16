@@ -11,20 +11,19 @@ class AdapterController {
         const tradingViewData = req.body;
 
         //  Validate IP address
-        const isTradingViewIp = ipWhitelist.some(ip => req.connection.remoteAddress.includes(ip));
+        let isTradingViewIp = ipWhitelist.some(ip => req.connection.remoteAddress.includes(ip));
+        if(tradingViewData.mode === "development") isTradingViewIp = true;
 
         //  Determine strategy association with tV data.
         //  Note: strategy.config should include such tradingViewData.strategy
-        const currentStrategy = strategies.filter(strategy => strategy.Strategy === tradingViewData.Strategy)[0];
+        const currentStrategy = strategies.filter(strategy => strategy.strategy === tradingViewData.strategy)[0];
+
+        console.log(currentStrategy);
 
         if (typeof currentStrategy !== 'undefined' && isTradingViewIp) {
-
-            console.log(tradingViewData);
-
             //Rote tradingViewData to associated strategy server
             const [sendRequestError, sendRequest] = await to(
-                axios.post(`${currentStrategy.serverIp}:
-                ${tradingViewData.mode === "master" ? currentStrategy.master_port : currentStrategy.development_port}/alert_data`, tradingViewData)
+                axios.post(`${currentStrategy.serverIp}:${tradingViewData.mode === "master" ? currentStrategy.masterPort : currentStrategy.developmentPort}/alert_data`, tradingViewData)
             )
 
             if (sendRequestError) {
@@ -35,7 +34,10 @@ class AdapterController {
             res.status(200).json(sendRequest.data);
         }
         else {
-            res.status(400).send(`Strategy: ${currentStrategy} ipFlag: ${isTradingViewIp}`);
+            res.status(400).send({
+                'strategy':`Strategy: ${currentStrategy}`,
+                'ipFlag': isTradingViewIp
+            });
         }
     }
 }
