@@ -31,7 +31,8 @@ class AdapterController {
                 console.log(sendRequestError);
                 return res.status(400).json(sendRequestError);
             }
-
+            
+            console.log(sendRequest.data);
             res.status(200).json(sendRequest.data);
         }
         else {
