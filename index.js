@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const port = process.env.PORT || 4040;
 const ipAddress = process.env.IP_ADDRESS;
 const http = require('http');
