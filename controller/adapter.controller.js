@@ -23,8 +23,7 @@ class AdapterController {
 
             //Rote tradingViewData to associated strategy server
             const [sendRequestError, sendRequest] = await to(
-                axios.post(`${currentStrategy.serverIp}:
-                ${tradingViewData.mode === "master" ? currentStrategy.master_port : currentStrategy.development_port}/alert_data`, tradingViewData)
+                axios.post(`${currentStrategy.serverIp}:${tradingViewData.mode === "master" ? currentStrategy.master_port : currentStrategy.development_port}/alert_data`, tradingViewData)
             )
 
             if (sendRequestError) {
