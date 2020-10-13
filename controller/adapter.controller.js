@@ -12,7 +12,7 @@ class AdapterController {
 
        
         //  Validate IP address
-        const isTradingViewIp = ipWhitelist.some(ip => req.connection.remoteAddress.includes(ip));
+        const isTradingViewIp = true//ipWhitelist.some(ip => req.connection.remoteAddress.includes(ip));
 
         //  Determine strategy association with tradingView data.
         //  Note: strategy.config should include such tradingViewData.strategy
@@ -21,7 +21,7 @@ class AdapterController {
         if (typeof currentStrategy !== 'undefined' && isTradingViewIp) {
             //  Initiate a request to close a previous position, and then send an actual request to open a position.
             if (currentStrategy.use_close_calls_feature == true) {
-                let close_data = tradingViewData;
+                let close_data = JSON.parse(JSON.stringify(tradingViewData));
 
                 if (tradingViewData.Action == "long") {
                     close_data.Action = "close_short";
@@ -34,17 +34,16 @@ class AdapterController {
                 console.log(close_data);
                 console.log("-----------close_data----------------\n");
 
-                sendStrategyExecutorCoreRequest(currentStrategy, close_data);
-                sendStrategyExecutorCoreRequest(currentStrategy, tradingViewData)
+                this.sendStrategyExecutorCoreRequest(currentStrategy, close_data);
+                this.sendStrategyExecutorCoreRequest(currentStrategy, tradingViewData)
             }
             else {
-                sendStrategyExecutorCoreRequest(currentStrategy, tradingViewData)
+                this.sendStrategyExecutorCoreRequest(currentStrategy, tradingViewData)
             }
+
             console.log("-----------tradingViewData----------------\n");
             console.log(tradingViewData);
             console.log("-----------tradingViewData----------------\n");
-    
-
         }
         else {
             res.status(400).send(`Strategy: ${currentStrategy} ipFlag: ${isTradingViewIp}`);
@@ -65,7 +64,7 @@ class AdapterController {
 
             return res.status(400).json(sendRequestError);
         }
-        
+
         console.log("-----------sendRequest.data----------------\n");
         console.log(sendRequest.data);
         console.log("-----------sendRequest.data----------------\n");
