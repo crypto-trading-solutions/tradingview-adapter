@@ -26,7 +26,10 @@ npm install
 "Mode"    : "development" || "master"
 }
 ```
+NOTE: 
+Ticker - Use ticker name as on exchange! Not always Tradingview has the same ticker name, for example, Tradingview ticker - *BTCUSDTPERP* | Binance futures ticker - *BTCUSDT* *use this one.
 
+Action - You can use {{strategy.order.alert_message}} + set alert_message in pine script (v4+)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
