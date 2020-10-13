@@ -5,14 +5,14 @@ const ipWhitelist = require('../config/ipWhitelist.config');
 const axios = require('axios').default;
 
 class AdapterController {
-    //  tV - tradingView
     async determineStrategy(req, res, next) {
         //  tradingViewData - data from tV webhook req
         const tradingViewData = req.body;
 
-	    console.log("tv data:\n");
+	    console.log("-----------tradingViewData----------------\n");
         console.log(tradingViewData);
-        
+        console.log("-----------tradingViewData----------------\n");
+
         //  Validate IP address
         const isTradingViewIp = ipWhitelist.some(ip => req.connection.remoteAddress.includes(ip));
 
@@ -22,7 +22,7 @@ class AdapterController {
 
         if (typeof currentStrategy !== 'undefined' && isTradingViewIp) {
 
-            //Rote tradingViewData to associated strategy server
+            //Rote tradingViewData to associated tradingView server
             const [sendRequestError, sendRequest] = await to(
                 axios.post(`${currentStrategy.serverIp}:${tradingViewData.Mode === "master" ? currentStrategy.master_port : currentStrategy.development_port}/alert_data`, tradingViewData)
             )

@@ -19,10 +19,10 @@ npm install
 ```yaml 
 {
 "Ticker"  : "{{ticker}}",
-"Price"   : " {{strategy.order.price}}",
+"Price"   : "{{strategy.order.price}}",
 "Time"    : "{{time}}",
-"Strategy": "rwi",
-"Action"  : "{{strategy.order.action}}",
+"Strategy": "strategy name",
+"Action"  : "long || short || close_long || close_short"
 "Mode"    : "development" || "master"
 }
 ```
