@@ -9,14 +9,16 @@ class AdapterController {
     async determineStrategy(req, res, next) {
         //  tradingViewData - data from tV webhook req
         const tradingViewData = req.body;
-	console.log("tv data:\n");
-	console.log(tradingViewData);
+
+	    console.log("tv data:\n");
+        console.log(tradingViewData);
+        
         //  Validate IP address
         const isTradingViewIp = ipWhitelist.some(ip => req.connection.remoteAddress.includes(ip));
 
         //  Determine strategy association with tV data.
         //  Note: strategy.config should include such tradingViewData.strategy
-        const currentStrategy = strategies.filter(strategy => strategy.Strategy === tradingViewData.Strategy)[0];
+        const currentStrategy = strategies.filter(strategy => strategy.strategy_name === tradingViewData.strategy_name)[0];
 
         if (typeof currentStrategy !== 'undefined' && isTradingViewIp) {
 

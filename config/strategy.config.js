@@ -1,11 +1,21 @@
-// strategies - describes an actual list of strategies that can use tradingview-adapter data,
-//              store strategy server address data which will handle adapter signals
+/////////////////////////
+// *strategies* - describes an actual list of strategies that can use tradingview-adapter data,
+//                store strategy server address data which will handle adapter signals
+////
+// use_close_calls_feature
+//
+//
+//
+//
+//
 const strategies = [
     {
-        "Strategy":"scalp sma",
+        "strategy_name":"scalp sma",
         "serverIp":"http://localhost",
         "development_port": "91",
-        "master_port" : "81"
+        "master_port" : "81",
+        "use_close_calls_feature":true
+
     }
 ]
 
