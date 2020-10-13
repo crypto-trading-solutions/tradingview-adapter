@@ -9,7 +9,8 @@ class AdapterController {
     async determineStrategy(req, res, next) {
         //  tradingViewData - data from tV webhook req
         const tradingViewData = req.body;
-
+	console.log("tv data:\n");
+	console.log(tradingViewData);
         //  Validate IP address
         const isTradingViewIp = ipWhitelist.some(ip => req.connection.remoteAddress.includes(ip));
 
@@ -19,11 +20,9 @@ class AdapterController {
 
         if (typeof currentStrategy !== 'undefined' && isTradingViewIp) {
 
-            console.log(tradingViewData);
-
             //Rote tradingViewData to associated strategy server
             const [sendRequestError, sendRequest] = await to(
-                axios.post(`${currentStrategy.serverIp}:${tradingViewData.mode === "master" ? currentStrategy.master_port : currentStrategy.development_port}/alert_data`, tradingViewData)
+                axios.post(`${currentStrategy.serverIp}:${tradingViewData.Mode === "master" ? currentStrategy.master_port : currentStrategy.development_port}/alert_data`, tradingViewData)
             )
 
             if (sendRequestError) {
