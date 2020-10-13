@@ -10,16 +10,13 @@ class AdapterController {
         //  tradingViewData - data from tV webhook req
         const tradingViewData = req.body;
 
-        console.log("-----------tradingViewData----------------\n");
-        console.log(tradingViewData);
-        console.log("-----------tradingViewData----------------\n");
-
+       
         //  Validate IP address
         const isTradingViewIp = ipWhitelist.some(ip => req.connection.remoteAddress.includes(ip));
 
         //  Determine strategy association with tradingView data.
         //  Note: strategy.config should include such tradingViewData.strategy
-        const currentStrategy = strategies.filter(strategy => strategy.strategy_name === tradingViewData.strategy_name)[0];
+        const currentStrategy = strategies.filter(strategy => strategy.strategy_name === tradingViewData.Strategy)[0];
 
         if (typeof currentStrategy !== 'undefined' && isTradingViewIp) {
             //  Initiate a request to close a previous position, and then send an actual request to open a position.
@@ -43,6 +40,10 @@ class AdapterController {
             else {
                 sendStrategyExecutorCoreRequest(currentStrategy, tradingViewData)
             }
+            console.log("-----------tradingViewData----------------\n");
+            console.log(tradingViewData);
+            console.log("-----------tradingViewData----------------\n");
+    
 
         }
         else {
@@ -57,11 +58,18 @@ class AdapterController {
         )
 
         if (sendRequestError) {
+
+            console.log("-----------sendRequestError----------------\n");
             console.log(sendRequestError);
+            console.log("-----------sendRequestError----------------\n");
+
             return res.status(400).json(sendRequestError);
         }
-
+        
+        console.log("-----------sendRequest.data----------------\n");
         console.log(sendRequest.data);
+        console.log("-----------sendRequest.data----------------\n");
+
         res.status(200).json(sendRequest.data);
     }
 }
