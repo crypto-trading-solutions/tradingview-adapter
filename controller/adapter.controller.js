@@ -1,4 +1,5 @@
 const to = require('await-to-js').default;
+const util = require('util');
 const strategies = require('../config/strategy.config');
 const ipWhitelist = require('../config/ipWhitelist.config');
 
@@ -11,7 +12,7 @@ class AdapterController {
         const tradingViewData = req.body;
 
         //  Validate IP address
-        const isTradingViewIp = ipWhitelist.some(ip => req.connection.remoteAddress.includes(ip));
+        const isTradingViewIp = true//ipWhitelist.some(ip => req.connection.remoteAddress.includes(ip));
 
         //  Determine strategy association with tradingView data.
         //  Note: strategy.config should include such tradingViewData.strategy
@@ -32,9 +33,12 @@ class AdapterController {
                 console.log("-----------close_data----------------\n");
                 console.log(close_data);
                 console.log("-----------close_data----------------\n");
-
-                this.sendStrategyExecutorCoreRequest(currentStrategy, close_data);
-                this.sendStrategyExecutorCoreRequest(currentStrategy, tradingViewData)
+                this.sendStrategyExecutorCoreRequest(currentStrategy, close_data).then(result => {
+                    console.log(`sendStrategyExecutorCoreRequest close_data result: ${util.inspect(result)}`);
+                    this.sendStrategyExecutorCoreRequest(currentStrategy, tradingViewData).then(result => {
+                        console.log(`sendStrategyExecutorCoreRequest tradingViewData result" ${util.inspect(result)}`);
+                    });
+                });
             }
             else {
                 this.sendStrategyExecutorCoreRequest(currentStrategy, tradingViewData)
@@ -43,9 +47,10 @@ class AdapterController {
             console.log("-----------tradingViewData----------------\n");
             console.log(tradingViewData);
             console.log("-----------tradingViewData----------------\n");
+            res.status(200).send();
         }
         else {
-            res.status(400).send(`Strategy: ${currentStrategy} ipFlag: ${isTradingViewIp}`);
+            res.status(400).send();
         }
     }
 
@@ -55,18 +60,10 @@ class AdapterController {
             axios.post(`${currentStrategy.serverIp}:${tradingViewData.Mode === "master" ? currentStrategy.master_port : currentStrategy.development_port}/alert_data`, tradingViewData)
         )
 
-        if (sendRequestError) {
-
-            console.log("-----------sendRequestError----------------\n");
-            console.log(sendRequestError);
-            console.log("-----------sendRequestError----------------\n");
-
-            return res.status(400).json(sendRequestError);
-        }
-
-        console.log("-----------sendRequest.data----------------\n");
-        console.log(sendRequest.data);
-        console.log("-----------sendRequest.data----------------\n");
+        if (sendRequestError)
+            return sendRequestError;
+        else
+            return sendRequest.data;
     }
 }
 
