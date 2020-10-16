@@ -12,7 +12,7 @@ class AdapterController {
         const tradingViewData = req.body;
 
         //  Validate IP address
-        const isTradingViewIp = true//ipWhitelist.some(ip => req.connection.remoteAddress.includes(ip));
+        const isTradingViewIp = ipWhitelist.some(ip => req.connection.remoteAddress.includes(ip));
 
         //  Determine strategy association with tradingView data.
         //  Note: strategy.config should include such tradingViewData.strategy
