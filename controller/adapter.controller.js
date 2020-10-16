@@ -10,9 +10,8 @@ class AdapterController {
         //  tradingViewData - data from tV webhook req
         const tradingViewData = req.body;
 
-       
         //  Validate IP address
-        const isTradingViewIp = true//ipWhitelist.some(ip => req.connection.remoteAddress.includes(ip));
+        const isTradingViewIp = ipWhitelist.some(ip => req.connection.remoteAddress.includes(ip));
 
         //  Determine strategy association with tradingView data.
         //  Note: strategy.config should include such tradingViewData.strategy
@@ -68,8 +67,6 @@ class AdapterController {
         console.log("-----------sendRequest.data----------------\n");
         console.log(sendRequest.data);
         console.log("-----------sendRequest.data----------------\n");
-
-        res.status(200).json(sendRequest.data);
     }
 }
 
