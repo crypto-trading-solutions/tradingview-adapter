@@ -36,17 +36,22 @@ class AdapterController {
                 this.sendStrategyExecutorCoreRequest(currentStrategy, close_data).then(result => {
                     console.log(`sendStrategyExecutorCoreRequest close_data result: ${util.inspect(result)}`);
                     this.sendStrategyExecutorCoreRequest(currentStrategy, tradingViewData).then(result => {
+                        console.log("-----------tradingViewData----------------\n");
+                        console.log(tradingViewData);
+                        console.log("-----------tradingViewData----------------\n");
                         console.log(`sendStrategyExecutorCoreRequest tradingViewData result" ${util.inspect(result)}`);
                     });
                 });
             }
             else {
-                this.sendStrategyExecutorCoreRequest(currentStrategy, tradingViewData)
+                this.sendStrategyExecutorCoreRequest(currentStrategy, tradingViewData).then(result => {
+                    console.log("-----------tradingViewData----------------\n");
+                    console.log(tradingViewData);
+                    console.log("-----------tradingViewData----------------\n");
+                });
             }
 
-            console.log("-----------tradingViewData----------------\n");
-            console.log(tradingViewData);
-            console.log("-----------tradingViewData----------------\n");
+            
             res.status(200).send();
         }
         else {
