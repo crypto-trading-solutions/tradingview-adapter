@@ -30,16 +30,16 @@ class AdapterController {
                     close_data.Action = "close_long";
                 }
 
-                console.log("-----------close_data----------------\n");
-                console.log(close_data);
-                console.log("-----------close_data----------------\n");
                 this.sendStrategyExecutorCoreRequest(currentStrategy, close_data).then(result => {
-                    console.log(`sendStrategyExecutorCoreRequest close_data result: ${util.inspect(result)}`);
+                    console.log("-----------close_data----------------\n");
+                    console.log(close_data);
+                    console.log("-----------close_data----------------");
+                    console.log(`sendStrategyExecutorCoreRequest close_data result: ${util.inspect(result)}\n\n`);
                     this.sendStrategyExecutorCoreRequest(currentStrategy, tradingViewData).then(result => {
                         console.log("-----------tradingViewData----------------\n");
                         console.log(tradingViewData);
-                        console.log("-----------tradingViewData----------------\n");
-                        console.log(`sendStrategyExecutorCoreRequest tradingViewData result" ${util.inspect(result)}`);
+                        console.log("-----------tradingViewData----------------");
+                        console.log(`sendStrategyExecutorCoreRequest tradingViewData result" ${util.inspect(result)}\n\n`);
                     });
                 });
             }
@@ -47,11 +47,11 @@ class AdapterController {
                 this.sendStrategyExecutorCoreRequest(currentStrategy, tradingViewData).then(result => {
                     console.log("-----------tradingViewData----------------\n");
                     console.log(tradingViewData);
-                    console.log("-----------tradingViewData----------------\n");
+                    console.log("-----------tradingViewData----------------");
+                    console.log(`sendStrategyExecutorCoreRequest tradingViewData result" ${util.inspect(result)}\n\n`);
                 });
             }
 
-            
             res.status(200).send();
         }
         else {
