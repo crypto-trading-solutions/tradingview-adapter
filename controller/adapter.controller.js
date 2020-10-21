@@ -82,12 +82,17 @@ class AdapterController {
 
     async occ_data_agregator(req, res, next) {
         let tradingViewData = req.body;
+        console.log(tradingViewData);
+        console.log("------------------");
+        console.log(tradingViewData.open);
+        console.log(tradingViewData.close);
+
 
         this.occ_open_data_arr.push(tradingViewData.open);
         this.occ_close_data_arr.push(tradingViewData.close);
 
-        console.log(`occ_open_data_arr: ${this.occ_open_data_arr.toString()}`.yellow);
-        console.log(`occ_close_data_arr: ${this.occ_close_data_arr.toString()}`.yellow);
+        console.log(`occ_open_data_arr: ${this.occ_open_data_arr}`.yellow);
+        console.log(`occ_close_data_arr: ${this.occ_close_data_arr}`.yellow);
 
 
     }
