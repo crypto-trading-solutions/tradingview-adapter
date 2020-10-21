@@ -86,8 +86,8 @@ class AdapterController {
         this.occ_open_data_arr.push(parseFloat(tradingViewData.open));
         this.occ_close_data_arr.push(parseFloat(tradingViewData.close));
 
-        console.log(`occ_open_data_arr: ${occ_open_data_arr}`.yellow);
-        console.log(`occ_close_data_arr: ${occ_close_data_arr}`.yellow);
+        console.log(`occ_open_data_arr: ${this.occ_open_data_arr}`.yellow);
+        console.log(`occ_close_data_arr: ${this.occ_close_data_arr}`.yellow);
 
 
     }
