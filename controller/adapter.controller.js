@@ -76,8 +76,8 @@ class AdapterController {
         //  Initialize position side: True - long | False - short
         this.occ_position_side = this.occ_position_side == tradingViewData.isLong?this.occ_position_side:tradingViewData.isLong;
 
-        console.log(tradingViewData);
-        console.log(`this.occ_position_side:${ this.occ_position_side}`);
+        console.log("\x1b[43m",`${tradingViewData}`);
+        console.log("\x1b[43m",`this.occ_position_side:${ this.occ_position_side}`);
 
     }
 }
