@@ -71,7 +71,7 @@ class AdapterController {
             return sendRequest.data;
     }
 
-    async indicator_alert_data_agregator(req, res, next) {
+    async occ_data_agregator(req, res, next) {
         const tradingViewData = req.body;
         console.log(tradingViewData);
     }
