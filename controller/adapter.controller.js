@@ -72,8 +72,19 @@ class AdapterController {
     }
 
     async occ_data_agregator(req, res, next) {
+
         const tradingViewData = req.body;
+        if(this.occ_position_side = null){
+            this.occ_position_side = tradingViewData.isLong;
+        }
+        else
+        {
+            this.occ_position_side = this.occ_position_side == tradingViewData.isLong?this.occ_position_side:tradingViewData.isLong;
+        }
+
         console.log(tradingViewData);
+        console.log(`this.occ_position_side:${ this.occ_position_side}`);
+
     }
 }
 
