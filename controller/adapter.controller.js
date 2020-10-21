@@ -70,6 +70,11 @@ class AdapterController {
         else
             return sendRequest.data;
     }
+
+    async indicator_alert_data_agregator(req, res, next) {
+        const tradingViewData = req.body;
+        console.log(tradingViewData);
+    }
 }
 
 module.exports = new AdapterController();
