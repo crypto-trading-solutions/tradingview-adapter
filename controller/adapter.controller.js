@@ -10,10 +10,12 @@ const axios = require('axios').default;
 
 class AdapterController {
 
-    constructor(name) {
-        this.occ_data_arr = [];
-        console.log("i'm here")
-      }
+    constructor() {
+        this.occ_open_data_arr = [];
+        this.occ_close_data_arr = [];
+        console.log("AdapterController constructor end");
+    }
+
     async determineStrategy(req, res, next) {
         //  tradingViewData - data from tV webhook req
         const tradingViewData = req.body;
@@ -80,6 +82,13 @@ class AdapterController {
 
     async occ_data_agregator(req, res, next) {
         let tradingViewData = req.body;
+
+        this.occ_open_data_arr.push(parseFloat(tradingViewData.open));
+        this.occ_close_data_arr.push(parseFloat(tradingViewData.close));
+
+        console.log(`occ_open_data_arr: ${occ_open_data_arr}`.yellow);
+        console.log(`occ_close_data_arr: ${occ_close_data_arr}`.yellow);
+
 
     }
 }
