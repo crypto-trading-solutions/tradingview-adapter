@@ -1,5 +1,7 @@
 const to = require('await-to-js').default;
 const util = require('util');
+const colors = require('colors');
+
 const strategies = require('../config/strategy.config');
 const ipWhitelist = require('../config/ipWhitelist.config');
 
@@ -82,9 +84,9 @@ class AdapterController {
         this.current_occ_position_side = this.current_occ_position_side == tradingViewData.isLong?this.current_occ_position_side:tradingViewData.isLong;
         }
 
-        console.log("\x1b[43m",`${tradingViewData}`);
-        console.log("\x1b[43m",`previous_occ_position_side:${ this.previous_occ_position_side}`);
-        console.log("\x1b[43m",`current_occ_position_side:${ this.current_occ_position_side}`);
+        console.log(`${util.inspect(tradingViewData)}`.yellow);
+        console.log(`previous_occ_position_side:${ this.previous_occ_position_side}`.yellow);
+        console.log(`current_occ_position_side:${ this.current_occ_position_side}`.yellow);
 
     }
 }
