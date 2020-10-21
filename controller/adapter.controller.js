@@ -76,17 +76,18 @@ class AdapterController {
     async occ_data_agregator(req, res, next) {
         let tradingViewData = req.body;
         //  Initialize position side: True - long | False - short
-        if(tradingViewData.info = "previous bar info")
-        this.previous_occ_position_side = this.previous_occ_position_side == tradingViewData.isLong?this.previous_occ_position_side:tradingViewData.isLong;
-        if(tradingViewData.info = "current bar info")
-        {
-        this.current_occ_position_side = this.current_occ_position_side == tradingViewData.isLong?this.current_occ_position_side:tradingViewData.isLong;
+        if (tradingViewData.info = "previous bar info") {
+            this.previous_occ_position_side = this.previous_occ_position_side == tradingViewData.isLong ? this.previous_occ_position_side : tradingViewData.isLong;
+            console.log("---------------------");
+            console.log(new Date());
+            console.log(`previous_occ_position_side:${this.previous_occ_position_side}`.yellow);
+            console.log(`current_occ_position_side:${this.current_occ_position_side}`.yellow);
+            console.log("---------------------");
         }
-        console.log("---------------------");
-        console.log(Date.now());
-        console.log(`previous_occ_position_side:${ this.previous_occ_position_side}`.yellow);
-        console.log(`current_occ_position_side:${ this.current_occ_position_side}`.yellow);
-        console.log("---------------------");
+        if (tradingViewData.info = "current bar info") {
+            this.current_occ_position_side = this.current_occ_position_side == tradingViewData.isLong ? this.current_occ_position_side : tradingViewData.isLong;
+        }
+
 
 
     }
