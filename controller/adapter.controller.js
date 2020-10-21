@@ -74,7 +74,9 @@ class AdapterController {
     async occ_data_agregator(req, res, next) {
 
         const tradingViewData = req.body;
-        if(this.occ_position_side = null){
+        console.log(`checker:${this.occ_position_side}`);
+        
+        if(this.occ_position_side == null){
             this.occ_position_side = tradingViewData.isLong;
         }
         else
