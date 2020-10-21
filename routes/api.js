@@ -8,6 +8,6 @@ const adapterController = require('../controller/adapter.controller');
 // Used as main TradingView web-hook endpoint
 router.post('/alert', (req, res, next) => adapterController.determineStrategy(req, res, next));
 
-router.post('/occ_data_agregator', (req, res, next) => adapterController.indicator_alert_data_agregator(req, res, next));
+router.post('/occ_data_agregator', (req, res, next) => adapterController.occ_data_agregator(req, res, next));
 
 module.exports = router;
